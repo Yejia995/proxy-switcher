@@ -53,9 +53,9 @@ function enable() {
     // make the menu
     switcherMenu = new QuickSettings.QuickMenuToggle({
         label: _("Proxy"),
-        iconName: "preferences-system-network-proxy-symbolic",
+        iconName: "knemo-network-idle",
     });
-    switcherMenu.menu.setHeader("preferences-system-network-proxy-symbolic", _("Proxy"));
+    switcherMenu.menu.setHeader("knemo-network-idle", _("Proxy"));
 
     clickedConnectionId = switcherMenu.connect(
         'clicked', () => switcherMenu.menu.open(),
