@@ -12,10 +12,8 @@ const PROXY_SCHEMA = "org.gnome.system.proxy"
 const PROXY_MODE = "mode"
 
 // possible proxy modes and their text representation.
-const modeText = {'none': "Off",
-                  'manual': "Manual",
-                  'auto': "Automatic"};
-const modeList = ['none', 'manual', 'auto'];
+const modeText = {'manual': "Manual", 'auto': "Automatic"};
+const modeList = ['manual', 'auto'];
 
 // These will store the objects we create on enable.
 let settings = null;
@@ -56,10 +54,16 @@ function enable() {
         iconName: "knemo-network-idle",
     });
     switcherMenu.menu.setHeader("knemo-network-idle", _("Proxy"));
-
+    
+    // toggle the proxy mode
     clickedConnectionId = switcherMenu.connect(
-        'clicked', () => switcherMenu.menu.open(),
-    );
+        'clicked', () => {
+            if (switcherMenu.checked) {
+                settings.set_string(PROXY_MODE, "none");
+            } else {
+                settings.set_string(PROXY_MODE, modeList[0]);
+            }
+        });
 
     QuickSettingsMenu._addItems([switcherMenu]);
 
